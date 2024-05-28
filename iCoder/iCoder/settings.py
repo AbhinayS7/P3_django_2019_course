@@ -125,3 +125,7 @@ STATIC_URL = '/static/'
 MESSAGE_TAGS = {
     messages.ERROR:'danger'
 }
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,  "static"),
+]
