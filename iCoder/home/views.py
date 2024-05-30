@@ -7,7 +7,9 @@ from django.contrib.auth  import authenticate,  login, logout
 
 # Create your views here.
 def home(request): 
-    return render(request,'home/home.html')
+    # fetch display top 2 posts by views count
+    top_posts = Post.objects.order_by("-views")[:2]
+    return render(request,'home/home.html', { "top_posts":top_posts })
     # return HttpResponse('This is home ')
 
 def contact(request):
