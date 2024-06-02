@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from autoslug import AutoSlugField
 
 # Create your models here.
 
@@ -12,6 +13,7 @@ class Post(models.Model):
     timeStamp=models.DateTimeField(blank=True)
     views= models.IntegerField(default=0)
     content=models.TextField()
+    auto_slug = AutoSlugField(populate_from='title',unique_with='sno')
 
     def __str__(self):
         return self.title + " by " + self.author

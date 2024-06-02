@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from blog.models import Post, BlogComment
 from django.contrib import messages
+from django.db.models import Q
 # Create your views here.
 
 def blogHome(request): 
@@ -10,7 +11,7 @@ def blogHome(request):
     # return HttpResponse('This is  blog home. We will keep all blog posts here')
 
 def blogPost(request, slug): 
-    post=Post.objects.filter(slug=slug).first()
+    post=Post.objects.filter(auto_slug=slug).first()
     post.views = post.views + 1
     post.save()
     comments= BlogComment.objects.filter(post=post, parent=None)
