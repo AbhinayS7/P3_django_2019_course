@@ -8,3 +8,7 @@ admin.site.register((BlogComment))
 class PostAdmin(admin.ModelAdmin):
     class Media:
         js= ('tinyInject.js',)
+
+    search_fields = ['title','content']
+    list_display = ['sno','title','timeStamp','views']
+    list_filter = ['author']
