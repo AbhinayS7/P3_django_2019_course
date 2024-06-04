@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 def blogHome(request): 
     page_number = request.GET.get('page_number')
 
-    allPosts = Post.objects.all()
+    allPosts = Post.objects.all().order_by('-timeStamp')
     pagination = Paginator(allPosts,2)
     per_page_data = pagination.get_page(page_number)
 
