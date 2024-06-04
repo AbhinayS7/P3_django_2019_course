@@ -2,11 +2,17 @@ from django.shortcuts import render, HttpResponse, redirect
 from blog.models import Post, BlogComment
 from django.contrib import messages
 from django.db.models import Q
+from django.core.paginator import Paginator
 # Create your views here.
 
 def blogHome(request): 
+    page_number = request.GET.get('page_number')
+
     allPosts = Post.objects.all()
-    context = {"allPosts": allPosts}
+    pagination = Paginator(allPosts,2)
+    per_page_data = pagination.get_page(page_number)
+
+    context = {"allPosts": per_page_data, 'total_pages': pagination.page_range }
     return render(request, 'blog/blogHome.html', context)
     # return HttpResponse('This is  blog home. We will keep all blog posts here')
 
